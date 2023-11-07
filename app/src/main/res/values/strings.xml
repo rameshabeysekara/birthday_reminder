@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Birthday Reminder</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="save">Save</string>
+    <string name="EditText">editText</string>
+    <string name="Save">save</string>
+    <string name="Cancel">cancel</string>
+    <string name="select_date">Select Date</string>
+    <string name="selected_date">Selected Date:</string>
+    <string name="name">Name</string>
+    <string name="add_birthday_celebrant">Add Birthday Celebrant</string>
+    <string name="cake_icon_description">birthday_cake_</string>
+    <string name="birthday">Birthday</string>
+    <string name="brith_name">Name</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="select_birth_date">Select Date</string>
+    <string name="btn_save">Save</string>
+    <string name="tView_mm_dd_yyy">mm dd,yyy</string>
 </resources>
