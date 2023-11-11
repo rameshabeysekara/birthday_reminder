@@ -6,7 +6,7 @@
     <string name="EditText">editText</string>
     <string name="Save">save</string>
     <string name="Cancel">cancel</string>
-    <string name="select_date">Select Date</string>
+    <string name="select_date">Select a Date</string>
     <string name="selected_date">Selected Date:</string>
     <string name="name">Name</string>
     <string name="add_birthday_celebrant">Add a Friend`s Birthday</string>
@@ -14,7 +14,7 @@
     <string name="birthday">Birthday</string>
     <string name="brith_name">Name</string>
     <string name="enter_name">Enter Name</string>
-    <string name="select_birth_date">Select Date</string>
+    <string name="select_birth_date">Select a Date</string>
     <string name="btn_save">Save</string>
     <string name="tView_mm_dd_yyy">Select a Date</string>
 </resources>

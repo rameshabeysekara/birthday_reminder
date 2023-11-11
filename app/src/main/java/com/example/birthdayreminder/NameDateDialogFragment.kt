@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
-import android.widget.TextView
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -62,11 +61,6 @@ class NameDateDialogFragment : DialogFragment() {
                 val selectedDateCalendar = Calendar.getInstance()
                 selectedDateCalendar.set( selectedYear, selectedMonth, selectedDay )
                 selectedDate = sdf.format( selectedDateCalendar.time )
-
-//                val txtBirthdayView = view?.findViewById<TextView>(R.id.txtbirthdayView)
-//                if ( txtBirthdayView != null ) {
-//                    txtBirthdayView.text = selectedDate
-//                }
 
                 val changeTextButton = view?.findViewById< Button >( R.id.selectDateButton )
                 if ( changeTextButton != null ) {
