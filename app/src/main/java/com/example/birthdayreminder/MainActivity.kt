@@ -1,5 +1,6 @@
 package com.example.birthdayreminder
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,10 @@ class MainActivity : AppCompatActivity() {
         setContentView( R.layout.activity_main )
 
         val showDialogButton = findViewById< Button >( R.id.showDialogButton )
+        findViewById<Button>(R.id.settingsButton).setOnClickListener {
+            val intent = Intent(this,SettingsActivity::class.java)
+            startActivity(intent)
+        }
 
         recyclerView = findViewById( R.id.namebirth_RV )
         adapter = object : Adapter< ViewHolder >() {
