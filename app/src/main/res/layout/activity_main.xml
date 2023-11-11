@@ -14,20 +14,21 @@
         android:layout_height="214dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/showDialogButton"
-        app:layout_constraintVertical_bias="0.03" />
+        app:layout_constraintVertical_bias="0.249" />
 
     <Button
         android:id="@+id/showDialogButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
         android:text="@string/add_birthday_celebrant"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/settingsButton"
@@ -38,6 +39,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/namebirth_RV" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="408dp"
+        android:layout_height="53dp"
+        android:autoText="false"
+        android:background="#673AB7"
+        android:paddingTop="10dp"
+        android:text="Birthday App"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!--    <TextView-->
 <!--        android:id="@+id/nameAndDateTextView"-->

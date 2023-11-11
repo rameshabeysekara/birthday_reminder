@@ -2,104 +2,113 @@ package com.example.birthdayreminder
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import androidx.recyclerview.widget.RecyclerView.Adapter
+import java.util.UUID
 
 
 class MainActivity : AppCompatActivity() {
 
-    data class NameBirthday( val name: String, val birthday: String )
+    data class NameBirthday(val id: String, val name: String, val birthday: String)
 
     private val nameBirthdayList = mutableListOf< NameBirthday >()
-
     private lateinit var recyclerView : RecyclerView
-    private lateinit var adapter      : Adapter<ViewHolder>
+    private lateinit var adapter      : NameBirthdayAdapter
+
+    private val updateDataLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                loadData()
+                Toast.makeText(this, "Data Updated", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     override fun onCreate( savedInstanceState: Bundle? ) {
         super.onCreate( savedInstanceState )
         setContentView( R.layout.activity_main )
 
-        val showDialogButton = findViewById< Button >( R.id.showDialogButton )
-        findViewById<Button>(R.id.settingsButton).setOnClickListener {
-            val intent = Intent(this,SettingsActivity::class.java)
-            startActivity(intent)
-        }
-
         recyclerView = findViewById( R.id.namebirth_RV )
-        adapter = object : Adapter< ViewHolder >() {
-
-            override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): ViewHolder {
-
-                val view = LayoutInflater.from( parent.context ).inflate( R.layout.item_name_birthday, parent, false )
-                return MyViewHolder( view )
-
-            }
-
-            override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-                val nameBirthday = nameBirthdayList[ position ]
-                val myViewHolder = holder as MyViewHolder
-                myViewHolder.nameTextView.text     = nameBirthday.name
-                myViewHolder.birthdayTextView.text = nameBirthday.birthday
-
-            }
-
-            override fun getItemCount(): Int {
-
-                return nameBirthdayList.size
-
-            }
-        }
+        adapter = NameBirthdayAdapter(nameBirthdayList) { id -> onItemClick(id) }
 
         recyclerView.adapter       = adapter
         recyclerView.layoutManager = LinearLayoutManager( this )
 
+        loadData()
+
+        val showDialogButton = findViewById< Button >( R.id.showDialogButton )
         showDialogButton.setOnClickListener {
             val dialogFragment = NameDateDialogFragment()
             dialogFragment.setOnNameDateSetListener { name, birthday ->
-                nameBirthdayList.add( NameBirthday( name, birthday ) )
+                val id = UUID.randomUUID().toString()
+                nameBirthdayList.add( NameBirthday( id, name, birthday ) )
                 adapter.notifyDataSetChanged()
+                saveData()
             }
             dialogFragment.show(supportFragmentManager, "nameDateDialog")
         }
 
+        findViewById<Button>(R.id.settingsButton).setOnClickListener {
+            val intent = Intent(this,SettingsActivity::class.java)
+            startActivity(intent)
+        }
     }
 
-    class MyViewHolder( itemView: View ) : ViewHolder( itemView )  {
-
-        val nameTextView     : TextView = itemView.findViewById( R.id.nameTextView )
-        val birthdayTextView : TextView = itemView.findViewById( R.id.birthdayTextView )
-
+    private fun onItemClick(id: String) {
+        val intent = Intent(this, UpdateDataActivity::class.java)
+        intent.putExtra("id", id)
+        updateDataLauncher.launch(intent)
     }
 
+    private fun saveData() {
+        val sharedPreferences = getSharedPreferences("birthdays", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
 
+        for (nameBirthday in nameBirthdayList) {
+            editor.putString("name_${nameBirthday.id}", nameBirthday.name)
+            editor.putString("birthday_${nameBirthday.id}", nameBirthday.birthday)
+        }
 
-//    fun updateNameAndDate(name: String, date: String) {
-//
-//        val nameAndDateTextView  = findViewById< TextView >( R.id.nameAndDateTextView )
-//        nameAndDateTextView.text = "Name: $name\nBirthdate: $date"
-//
-//    }
+        editor.apply()
+    }
 
-    //        showDialogButton.setOnClickListener {
-//
-//            val dialogFragment = NameDateDialogFragment()
-//            dialogFragment.setOnNameDateSetListener { name, birthday ->
-//                nameBirthdayList.add( NameBirthday( name, birthday) )
-//                adapter.notifyDataSetChanged()
-//
-//            }
-//
-//            dialogFragment.show(supportFragmentManager, "nameDateDialog")
-//
-//        }
+    private fun loadData() {
+        val sharedPreferences = getSharedPreferences("birthdays", MODE_PRIVATE)
+        nameBirthdayList.clear()
 
+        val uniqueIds = HashSet<String>()
+
+        val keys = sharedPreferences.all.keys
+        for (key in keys) {
+            val splitKey = key.split("_")
+            if (splitKey.size == 2) {
+                val (dataType, id) = splitKey
+                if (uniqueIds.add(id)) {
+                    val name = sharedPreferences.getString("name_$id", null)
+                    val birthday = sharedPreferences.getString("birthday_$id", null)
+
+                    if (name != null && birthday != null) {
+                        nameBirthdayList.add(NameBirthday(id, name, birthday))
+                    }
+                }
+            }
+        }
+
+        adapter.notifyDataSetChanged()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == UPDATE_DATA_REQUEST_CODE && resultCode == RESULT_OK) {
+            loadData()
+            Toast.makeText(this, "Data Updated", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    companion object {
+        const val UPDATE_DATA_REQUEST_CODE = 1001
+    }
 }
