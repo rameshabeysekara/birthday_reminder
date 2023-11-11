@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Birthday Details"
+        android:text="@string/birthday_details_title"
         android:textAllCaps="true"
         android:textColor="#673AB7"
         android:textSize="24sp"
@@ -26,11 +26,13 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Name"
+        android:hint="@string/birthday_name_edit"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        android:autofillHints=""
+        android:inputType="text"/>
 
     <EditText
         android:id="@+id/birthdayEditText"
@@ -42,7 +44,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        android:autofillHints=""
+        android:inputType="date" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -54,7 +58,8 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/birthdayEditText"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="TextSizeCheck">
 
 
         <Button
@@ -63,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:backgroundTint="#CC1414"
-            android:text="Delete"
+            android:text="@string/delete"
             android:textColor="#FFFFFF"
             android:textColorLink="#000000"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Update"
+            android:text="@string/btn_update_txt"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -87,6 +92,7 @@
             android:layout_marginTop="28dp"
             android:backgroundTint="#2196F3"
             android:text="Back"
+            android:textColor="#212121"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/deleteButton"
             tools:ignore="HardcodedText" />

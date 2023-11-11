@@ -36,7 +36,7 @@
             android:layout_width="83dp"
             android:layout_height="62dp"
             android:layout_marginStart="25dp"
-            android:contentDescription="Icon Cake"
+            android:contentDescription="@string/icon_ic_cake"
             android:src="@drawable/ic_cake"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,12 +51,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.187"
             app:layout_constraintStart_toEndOf="@+id/myImageView"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextContrastCheck"
+            android:inputType="text"
+            android:autofillHints="" />
 
         <Button
             android:id="@+id/selectDateButton"
             android:layout_width="160dp"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:layout_marginTop="80dp"
             android:background="@android:color/transparent"
             android:text="@string/select_birth_date"

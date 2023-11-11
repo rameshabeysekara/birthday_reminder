@@ -17,4 +17,10 @@
     <string name="select_birth_date">Select a Date</string>
     <string name="btn_save">Save</string>
     <string name="tView_mm_dd_yyy">Select a Date</string>
+    <string name="icon_cake">Icon Cake</string>
+    <string name="delete">Delete</string>
+    <string name="birthday_name_edit">Name</string>
+    <string name="birthday_details_title">Birthday Details</string>
+    <string name="btn_update_txt">Update</string>
+    <string name="icon_ic_cake">Icon Cake</string>
 </resources>
