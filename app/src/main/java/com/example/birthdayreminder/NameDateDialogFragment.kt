@@ -1,5 +1,6 @@
 package com.example.birthdayreminder
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,6 +19,7 @@ class NameDateDialogFragment : DialogFragment() {
     private var selectedDate : String = ""
     private var onNameDateSetListener : ( ( name : String, birthday : String ) -> Unit )? = null
 
+    @SuppressLint("CutPasteId")
     override fun onCreateView(
         inflater : LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,9 +63,14 @@ class NameDateDialogFragment : DialogFragment() {
                 selectedDateCalendar.set( selectedYear, selectedMonth, selectedDay )
                 selectedDate = sdf.format( selectedDateCalendar.time )
 
-                val txtBirthdayView = view?.findViewById<TextView>(R.id.txtbirthdayView)
-                if ( txtBirthdayView != null ) {
-                    txtBirthdayView.text = selectedDate
+//                val txtBirthdayView = view?.findViewById<TextView>(R.id.txtbirthdayView)
+//                if ( txtBirthdayView != null ) {
+//                    txtBirthdayView.text = selectedDate
+//                }
+
+                val changeTextButton = view?.findViewById< Button >( R.id.selectDateButton )
+                if ( changeTextButton != null ) {
+                    changeTextButton.text = selectedDate
                 }
             },
             year, month, day
@@ -71,3 +78,4 @@ class NameDateDialogFragment : DialogFragment() {
         datePickerDialog.show()
     }
 }
+

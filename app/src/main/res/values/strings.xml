@@ -16,5 +16,5 @@
     <string name="enter_name">Enter Name</string>
     <string name="select_birth_date">Select Date</string>
     <string name="btn_save">Save</string>
-    <string name="tView_mm_dd_yyy">mm dd,yyy</string>
+    <string name="tView_mm_dd_yyy">Select a Date</string>
 </resources>
